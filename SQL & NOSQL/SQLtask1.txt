@@ -1,0 +1,33 @@
+create table regions(region_id int unsigned not null primary key,region_name varchar(100));
+create table countries(country_id char(255) not null primary key,country_name varchar(100),region_id int unsigned not null);
+create table departments(department_id int unsigned not null primary key,department_name varchar(100) not null,manager_id int unsigned,location_id int unsigned);
+create table jobs(job_id varchar(100) not null primary key,job_title varchar(100) not null,min_salary decimal unsigned,max_salary decimal unsigned);
+create table employees(employee_id int unsigned not null primary key,first_name varchar(100),last_name varchar(100) not null,email varchar(100) not null,phone_number varchar(100),
+hire_date date not null,job_id varchar(100) not null,salary decimal not null,commission_pct decimal,manager_id int unsigned,department_id int unsigned);
+drop table locations;
+create table regions(region_id int unsigned not null primary key,region_name varchar(100));
+create table countries(country_id char(255) not null primary key,country_name varchar(100),region_id int unsigned not null);
+create table job_history(employee_id int unsigned not null,start_date date not null,end_date date not null,job_id varchar(100) not null,department_id int unsigned not null);
+alter table countries add foreign key(region_id) references regions(region_id);
+desc locations;
+alter table locations add foreign key(country_id) references countries(country_id);
+alter table departments add foreign key(manager_id) references locations(location_id);
+alter table locations drop column region_id;
+alter table locations add location_id int unsigned not null primary key;
+alter table employees add foreign key(job_id) references jobs(job_id),add foreign key(department_id) references departments(department_id),
+add foreign key(manager_id) references employees(employee_id);
+desc employees;
+alter table departments add foreign key(manager_id) references employees(employee_id);
+alter table job_history add foreign key(employee_id) references employees(employee_id);
+alter table job_history add primary key(start_date);
+alter table job_history add foreign key(job_id) references jobs(job_id),add foreign key(department_id) references departments(department_id);
+insert into regions values(1,"Europe");
+insert into locations values("2017 shinjuku-ku","1689","Tokyo","Tokyo prefecture",'JP',1200);
+select * from employees;
+insert into departments values(10,'administration',200,1700);
+insert into jobs values('AD_VP','Administration vice president',15000,30000);
+desc job_history;
+insert into employees values(100,'steven','king','SKING','515.123.4567',STR_TO_DATE('17-jun-1987','%d-%M-%Y'),'AD_PRES',24000,NULL,NULL,90);
+insert into job_history(employee_id,start_date,end_date,job_id,department_id) VALUES(200,STR_TO_DATE('17-SEP-1987'-'%d-%M-%Y'),STR_TO_DATE('17-JUN-1993'-'%d-%M-%Y'),'AD_ASST',90);
+set foreign_key_checks =0;
+INSERT INTO job_history VALUES (200,STR_TO_DATE('17-sep-1987','%d-%M-%Y'),STR_TO_DATE('17-jun-1993','%d-%M-%Y'),'AD_ASST',90);

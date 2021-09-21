@@ -1,0 +1,11 @@
+create table freshers(empid int(10), empname varchar(50), deptid int);
+create table spec(deptname varchar(60),location varchar(100), dptid int);
+insert into freshers values( 10,'aathi',10);
+insert into spec values( 'E8','cochin',8);
+delete from spec;
+select * from freshers;
+select* from spec;
+select *
+from spec f
+join spec s on f.deptname = s.dptid;
+update freshers set empname = 'yogi' where empid = 6;
