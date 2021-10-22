@@ -25,7 +25,6 @@ public class Ticket {
         this.travelDate = date;
     }
 
-
     public String generatePNR() {
 
             String counterFileName="count.txt";
@@ -77,23 +76,23 @@ public class Ticket {
 
     }
     public void addPassenger(String name, int age, char gender) {
-
-        passengerArrayList.add(new Passenger(name, age, gender));
         Passenger pass1 = new Passenger(name, age, gender);
-        double prize = calcPassengerFare(pass1);
-        passengers.put(pass1,prize);
-
+        passengerArrayList.add(pass1);
+        Passenger pass2 = new Passenger(name, age, gender);
+        double prize = calcPassengerFare(pass2);
+        passengers.put(pass2,prize);
     }
-    private double calcPassengerFare(Passenger passenger) {
+    //Passenger p = new Passenger();
+    private double calcPassengerFare(Passenger p) {
 
 
-        if (passenger.getAge() <= 12) {
+        if (p.getAge() <= 12) {
             return (train.getTicketPrice() * 0.5);
         }
-        if (passenger.getAge() >= 60) {
+        if (p.getAge() >= 60) {
             return (train.getTicketPrice() * 0.6);
         }
-        if (passenger.getGender() == 'F' || passenger.getGender() == 'f') {
+        if (p.getGender() == 'F' || p.getGender() == 'f') {
             return (train.getTicketPrice() * 0.75);
         } else {
             return train.getTicketPrice();
@@ -138,7 +137,7 @@ public class Ticket {
     }
     public void writeTicket() {
 
-        File file = new File("C:\\Users\\user311\\Desktop", "ticket.txt");
+        File file = new File(generatePNR()+".txt");
         try {
             file.createNewFile();
         } catch (IOException e) {
@@ -182,15 +181,12 @@ public class Ticket {
 
         bufferedWriter.write("Total Price:  " + calculateTotalTicketPrice());
 
-        //bufferedWriter.write(String.valueOf(stringBuilder));
-
-
     } catch (IOException e) {
         e.printStackTrace();
     }
 
 
-}
+    }
 
 
     }

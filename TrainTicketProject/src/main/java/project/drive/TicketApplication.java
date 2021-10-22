@@ -14,23 +14,26 @@ class TicketApplication {
         String date = null;
         int numOfPass = 0;
         int trainNo;
-        Ticket ticket = null;
+        Ticket ticket=null;
         Train train=null;
 
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter the Train Number");
         trainNo = sc.nextInt();
-
-        while (true) {
-            try {
+        boolean found = false;
+        do {
                 if (trainNo > 1000 && trainNo <= 1006) {
+                    found=false;
                     break;
                 }
-
-            } catch (Exception e) {
+                else{
                 System.out.println("Enter the valid train number.");
-            }
-        }
+                trainNo = sc.nextInt();
+                found=true;
+                break;
+                }
+        }while (found==true);
+
         try {
             train = TrainDAO.findTrain(trainNo);
         } catch (SQLException e) {
