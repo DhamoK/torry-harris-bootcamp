@@ -23,14 +23,14 @@
             input.required=true;
             val.appendChild(input);
 
-            val.appendChild(document.createTextNode("Age"));
+            val.appendChild(document.createTextNode("\tAge"));
             var input1 = document.createElement("input");
             input1.type="number";
             input1.name="age"+i;
             input1.required=true;
             val.appendChild(input1);
 
-            val.appendChild(document.createTextNode("Gender"));
+            val.appendChild(document.createTextNode("\tGender"));
             var input2 = document.createElement("input");
             input2.type="radio";
             input2.name="gender"+i;
@@ -49,17 +49,24 @@
             val.appendChild(document.createTextNode("Female"));
            val.appendChild(document.createElement("br"));
         }
+
     }
 
 </script>
 <center>
 
     <h2>Passenger Details</h2>
-        Enter No of Passangers
-        <input type="number" id="number"><br>
-        <br>
-        <a href="#" id="passanger" onclick = "passanger()">Fill details</a>
-        <div style="font-size:20px;" id="value"/>
+        <div>
+            Enter No of Passangers
+            <input type="number" id="number"><br>
+            <br>
+            <a href="#" id="passanger" onclick = "passanger()">Fill details</a>
+            <div style="font-size:20px;" id="value"/>
+        </div>
+        <div>
+            <a href="/src/main/webapp/signup.html"><input type="submit" value="Generate Ticket"></a>
+        </div>
+
 
 
         <!--        <table border="0px">-->
@@ -91,7 +98,9 @@
         <!--&lt;!&ndash;        </table>&ndash;&gt;<br><br>-->
         <!--        <button type = "submit" style="background-color:green" >Next</button><br>-->
         <!--        <button type = "submit" style="background-color:#f1f1f1">clear</button>-->
-
+  <!--  <div>
+        <input type="submit" value="Generate Ticket">
+    </div>-->
 </center>
 </body>
 </html>
